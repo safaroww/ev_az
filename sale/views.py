@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
-from .models import Property, City
+from .models import Property, City, PorpertyImage
 from .filters import PropertyFilter
 
 # Create your views here.
@@ -13,8 +13,13 @@ def home(request):
         'expensive_properties': expensive_properties
     })
 
-def property_detail(request):
-    return render(request, 'sale/property-detail.html')
+def property_detail(request, pk):
+    properties = Property.objects.filter(id=pk)
+    property_image = PorpertyImage.objects.all()
+    return render(request, 'sale/property-detail.html', context={
+        'properties': properties,
+        'property_image' : property_image
+    })
 
 def property_list(request):
     properties_filter = PropertyFilter(request.GET, queryset=Property.objects.all())

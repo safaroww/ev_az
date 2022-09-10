@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.conf import settings
 # Create your models here.
 
 
@@ -43,6 +43,10 @@ class Property(models.Model):
             return result
         else:
             return self.images.first()
+
+    
+
+    
     
 class PropertyFeature(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
