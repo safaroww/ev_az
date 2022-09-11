@@ -8,9 +8,11 @@ from .filters import PropertyFilter
 def home(request):
     pfilter = PropertyFilter()
     expensive_properties = Property.objects.all().order_by('-price')[:6]
+    last_properties = Property.objects.all()[:6]
     return render(request, 'sale/home.html', context={
         'pfilter': pfilter,
-        'expensive_properties': expensive_properties
+        'expensive_properties': expensive_properties,
+        'last_properties': last_properties
     })
 
 def property_detail(request):
